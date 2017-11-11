@@ -37,15 +37,7 @@ bot.dialog('/', [
     },
     function (session, results) {
         session.userData.name = results.response;
-
-        var request = require('request');
-        request('https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=MSFT&interval=1min&apikey=82ISQ1AMN633ECH8', function (error, response, body) {
-  //console.log('error:', error); // Print the error if one occurred
-  builder.Prompts.number(session, "Hi " + response + results.statusCode);
-  //console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
-  //console.log('body:', body); // Print the HTML for the Google homepage.
-});
-
+        builder.Prompts.number(session, "Hi " + results.response + ", How many years have you been coding?"); 
     },
     function (session, results) {
         session.userData.coding = results.response;
