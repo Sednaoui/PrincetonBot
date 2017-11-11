@@ -46,12 +46,24 @@ class AlphavantageAPI {
 var test = new AlphavantageAPI();
 
 test.getPrice("FB",(data)=>{
-  for (var key in data) {
-    if (data.hasOwnProperty(key)) {
-        console.log(key + " -> " + data[key]);
-    }
+  //this fetches the part where you find the time series
+  let timeSeriesData = data['Time Series (1min)'];
+  let timeSeriesDataOpen = [];
+  //this goes through all keys and fetches their object
+  for (var key in timeSeriesData) {
+    let timeSeriesObject = timeSeriesData[key];
+    //this object has the properties wanted - '1. open' and so on
+      timeSeriesDataOpen.push(parseFloat(timeSeriesObject['1. open']));
   }
-  //console.log(data);
+  let sum = 0;
+  for (i=0;i<timeSeriesDataOpen.length;i++) {
+  sum+= timeSeriesDataOpen[i];
+  console.log(i);
+}
+var average = sum/timeSeriesDataOpen.length;
+  console.log(average);
+
+
 });
 
 module.exports = AlphavantageAPI;
