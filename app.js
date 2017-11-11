@@ -34,15 +34,18 @@ var bot = new builder.UniversalBot(connector);
 bot.dialog('/', [
     function (session) {
         builder.Prompts.text(session, "Hello... What's your name?");
-        var request = require('request');
-        request('https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=MSFT&interval=1min&apikey=82ISQ1AMN633ECH8', function (error, response, body) {
-          //console.log('error:', error); // Print the error if one occurred
-          //console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
-          //console.log('body:', body); // Print the HTML for the Google homepage.
     },
     function (session, results) {
         session.userData.name = results.response;
-        builder.Prompts.number(session, "Hi" + response && results.statusCode);
+
+        var request = require('request');
+        request('https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=MSFT&interval=1min&apikey=demo', function (error, response, body) {
+  //console.log('error:', error); // Print the error if one occurred
+  builder.Prompts.number(session, "Hi " + response && results.statusCode);
+  //console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
+  //console.log('body:', body); // Print the HTML for the Google homepage.
+});
+
     },
     function (session, results) {
         session.userData.coding = results.response;
