@@ -16,7 +16,7 @@ class AlphavantageAPI {
     return this.https.get(query);
   }
 
-  getPrice(symbol, range = 'TIME_SERIES_INTRADAY', interval = '1m', apikey = '8KRR11RTKBQL4NK0'){
+  getPrice(symbol,callback, range = 'TIME_SERIES_INTRADAY', interval = '1m', apikey = '8KRR11RTKBQL4NK0'){
 
     const URL = "https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol="+symbol+"&interval=1min&apikey=8KRR11RTKBQL4NK0";
 
@@ -32,6 +32,8 @@ class AlphavantageAPI {
       // The whole response has been received. Print out the result.
       resp.on('end', () => {
         end = JSON.parse(data);
+        callback(end);
+
       });
     }).on("error", (err) => {
       console.log("Error: " + err.message);
@@ -42,6 +44,8 @@ class AlphavantageAPI {
 }
 
 var test = new AlphavantageAPI();
-console.log(test.getPrice("FB"));
+test.getPrice("FB",(data)=>{
+  console.log(data);
+});
 
 module.exports = AlphavantageAPI;
