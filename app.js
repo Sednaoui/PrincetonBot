@@ -22,6 +22,17 @@ var connector = new builder.ChatConnector({
 // Listen for messages from users
 server.post('/api/messages', connector.listen());
 
+// Make a portfolio
+
+var Portfolio = require("./portfolio");
+var port1 = new Portfolio();
+
+port1.log_portfolio();
+port1.buy('FB', 10.5, 1);
+port1.log_portfolio();
+port1.sell('FB', 12, 1);
+port1.log_portfolio();
+
 /*----------------------------------------------------------------------------------------
 * Bot Storage: This is a great spot to register the private state storage for your bot.
 * We provide adapters for Azure Table, CosmosDb, SQL Azure, or you can implement your own!
@@ -50,3 +61,4 @@ bot.dialog('/', [
                     " years and use " + session.userData.language + ".");
     }
 ]);
+
