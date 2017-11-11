@@ -44,8 +44,14 @@ class AlphavantageAPI {
 }
 
 var test = new AlphavantageAPI();
+
 test.getPrice("FB",(data)=>{
-  console.log(data);
+  for (var key in data) {
+    if (data.hasOwnProperty(key)) {
+        console.log(key + " -> " + data[key]);
+    }
+  }
+  //console.log(data);
 });
 
 module.exports = AlphavantageAPI;
