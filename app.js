@@ -74,15 +74,14 @@ bot.dialog('/', [
 
         builder.Prompts.number(session, "How many shares would you want to execute?");
     }
-
+    function(session,results) {
       wrapper.movingAverage(session.userData.symbol,session.userData.longterm,(averagelong) => {
       wrapper.movingAverage(session.userData.symbol,session.userData.shortterm, (averageshort) => {
         if(averagelong>averageshort){
-          function (session) {
-              builder.Prompts.text(session, "Go!");
-          }
+          builder.Prompts.text(session, "Go!");
         }
       })
-    })
+      })
+    }
 
 ]);
