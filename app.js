@@ -48,7 +48,7 @@ bot.dialog('/', [
     },
     function (session, results) {
         session.userData.name = results.response;
-        builder.Prompts.number(session, "Hi " + results.response + ", How many years have you been coding?"); 
+        builder.Prompts.number(session, "Hi " + results.response + ", How many years have you been coding?");
     },
     function (session, results) {
         session.userData.coding = results.response;
@@ -61,4 +61,3 @@ bot.dialog('/', [
                     " years and use " + session.userData.language + ".");
     }
 ]);
-
