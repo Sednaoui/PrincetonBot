@@ -65,7 +65,7 @@ bot.dialog('/', [
     session.userData.support  = results.response;
     builder.Prompts.number(session, "What percentage of your moving avereage days you want your resistance(ceiling) to be?");
     },
-    function (session, result) {
+    function (session, results) {
         session.userData.resistance = results.response;
         //session.send("Alright!"+session.userData.support+" just one more question and I'll take care of the rest!");
         builder.Prompts.number(session, "How many shares would you want to execute?");
@@ -78,7 +78,7 @@ bot.dialog('/', [
         //do while later
         //(1-session.userData.support)*averagelong=>(wrapper.movingAverage(session.userData.symbol,1,(RealTimePrice)=>{})))
         if(averagelong>averageshort) {
-          builder.Prompts.text(session, "Buy!");
+          builder.Prompts.text(session, "Baught");
          /*wrapper.currentClosing(session.userData.symbol, (data)=>
             port1.buy(session.userData.symbol, data, session.userData.numshares);
          );*/
@@ -87,9 +87,12 @@ bot.dialog('/', [
           builder.Prompts.text(session, port1.log_portfolio(session.userData.symbol));
           builder.Prompts.text(session, "Buy!3");
         }
-        else builder.Prompts.text(session, "Do Nothing for now..");
+        else if (averageshort>averagelong) {
+          builder.Prompts.text(session, "Sold");
+          port1.sell(session.userData.symbol, 180, session.userData.numshares);
+          builder.Prompts.text(session, port1.log_portfolio(session.userData.symbol));
+        }
       })
       })
     }
 ]);
-
