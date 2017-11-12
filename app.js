@@ -24,8 +24,8 @@ server.post('/api/messages', connector.listen());
 
 // Make a portfolio
 
-var Portfolio = require("./portfolio");
-var port1 = new Portfolio();
+const Portfolio = require("./portfolio.js");
+
 
 //Import wrapper
 const wrapper = require('./wrapper.js');
@@ -37,7 +37,7 @@ const wrapper = require('./wrapper.js');
 
 // Create your bot with a function to receive messages from the user
 var bot = new builder.UniversalBot(connector);
-
+var port1 = new Portfolio();
 bot.dialog('/', [
     function (session) {
         builder.Prompts.text(session, "Let's begin to setup your trading strategy: Moving Average Algorithm. Which Stock Symbole you want to trade?");
@@ -74,7 +74,7 @@ bot.dialog('/', [
         //(1-session.userData.support)*averagelong=>(wrapper.movingAverage(session.userData.symbol,1,(RealTimePrice)=>{})))
         if(averagelong>averageshort) {
           builder.Prompts.text(session, "Buy!");
-          //port1.buy(symbol, 10, 1);
+          port1.buy(symbol, 10, 1);
           //builder.Prompts.text(session,port1.log_portfolio());
         }
         else builder.Prompts.text(session, "Do Nothing for now..");
