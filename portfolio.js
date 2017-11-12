@@ -26,7 +26,7 @@ Portfolio.prototype.sell = function(name, price_sold, n_sold) {
 
 Portfolio.prototype.log_portfolio = function(key) {
     var price_n = this.keys[key];
-    return key + ' price_bought: ' + price_n[0].toString() + ' num_shares: ' + price_n[1].toString() + ' current portfolio: ' + this.balance.toString();
+    return key + ' price_bought: ' + price_n[0].toString() + ' num_shares: ' + price_n[1].toString() + ' current portfolio: ' + -1*this.balance.toString();
 };
 
 exports.Portfolio = Portfolio;
