@@ -87,7 +87,7 @@ function latest(symbol, callback) {
         for (var key in timeSeriesData) {
             let timeSeriesObject = timeSeriesData[key];
             //this object has the properties wanted - '4. close' and so on
-            timeSeriesDataOpen.push(parseFloat(timeSeriesObject['4. close']));
+            timeSeriesDataOpen.push(parseFloat(timeSeriesObject['4. close']).toFixed(2));
         }
         latest = timeSeriesDataOpen[0];
         callback(latest);
