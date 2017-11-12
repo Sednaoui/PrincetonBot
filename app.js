@@ -38,6 +38,8 @@ const wrapper = require('./wrapper.js');
 // Create your bot with a function to receive messages from the user
 var bot = new builder.UniversalBot(connector);
 var port1 = new Portfolio();
+
+port1.buy('FB',178.4,200);
 bot.dialog('/', [
     function(session) {
         builder.Prompts.text(session, "Let's begin to setup your trading strategy: Moving Average Algorithm. Which Stock Symbole you want to trade?");
@@ -51,8 +53,18 @@ bot.dialog('/', [
 
     function(session, results) {
         session.userData.longterm = results.response;
+
+        if(session.userData.longterm==='none') {
+          {
+              builder.Prompts.text(session, "We sold your Facebook stocks, I made you some money!");
+                port1.sell(session.userData.symbol, currentclosing, session.userData.numshares);
+                builder.Prompts.text(session, port1.log_portfolio(session.userData.symbol));
+          }
+        }
+        else {
         session.send("Got it..." + session.userData.longterm);
         builder.Prompts.number(session, "What's your short term moving average days?");
+      }
     },
 
     function(session, results) {
@@ -87,7 +99,7 @@ bot.dialog('/', [
               does that work??
               */
               wrapper.currentClosing(session.userData.symbol, (currentclosing) => {
-                if ((averagelong > averageshort)) 
+                if ((averagelong > averageshort))
               //  ((1-session.userData.support)*(session.userData.averagelong)) >= currentclosing
               {
                         builder.Prompts.text(session, "Hey, we bought the stocks!");
@@ -96,7 +108,9 @@ bot.dialog('/', [
                         builder.Prompts.text(session, port1.log_portfolio(session.userData.symbol));
 
                       //sell give me tyta sec
-                } else if ((averageshort > averagelong) && ((1-session.userData.resistance)*(session.userData.averageshort)) <= currentclosing) {
+                } else if (averageshort > averagelong)
+                        //(1-session.userData.resistance)*(session.userData.averageshort)) <= currentclosing
+                {
                     builder.Prompts.text(session, "We sold them and believe me, we made you some money!");
                       //also quick question, why do you call buy twice in the function above?
                       port1.sell(session.userData.symbol, currentclosing, session.userData.numshares);
