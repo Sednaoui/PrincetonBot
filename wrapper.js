@@ -78,9 +78,11 @@ function currentClosing(symbol,callback){
   });
 }
 
+/* Example of call to wrapper
 currentClosing("FB", (data)=>{
   console.log(data);
 });
+*/
 
 module.exports = {
   AlphavantageAPI,
