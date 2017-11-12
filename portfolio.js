@@ -24,12 +24,9 @@ Portfolio.prototype.sell = function(name, price_sold, n_sold) {
     }
 };
 
-Portfolio.prototype.log_portfolio = function() {
-    var output ='';
-    for (var key in this.keys){
-        output = this.keys[key] + key[0].toString() + key[1].toString();
-    }
-     return output;
+Portfolio.prototype.log_portfolio = function(key) {
+    var price_n = this.keys[key];
+    return key + price_n[0].toString() + price_n[1].toString();
 };
 
 exports.Portfolio = Portfolio;
