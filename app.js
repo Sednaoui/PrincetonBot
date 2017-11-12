@@ -75,10 +75,6 @@ bot.dialog('/', [
     },
 
     function(session,results) {
-    builder.Prompts.text(session, "Go!"+session.userData.symbol);
-  }
-
-    /*function(session,results) {
       wrapper.movingAverage(session.userData.symbol,session.userData.longterm,(averagelong) => {
       wrapper.movingAverage(session.userData.symbol,session.userData.shortterm, (averageshort) => {
         if(averagelong>averageshort){
@@ -87,5 +83,5 @@ bot.dialog('/', [
         else builder.Prompts.text(session, "No!");
       })
       })
-    }*/
+    }
 ]);
