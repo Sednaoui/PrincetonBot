@@ -78,6 +78,22 @@ function currentClosing(symbol,callback){
   });
 }
 
+function latest(symbol,callback){
+  test = new AlphavantageAPI();
+  test.getPrice(symbol, (data) => {
+    let timeSeriesData = data['Time Series (Daily)'];
+    let timeSeriesDataOpen = [];
+    //this goes through all keys and fetches their object
+    for (var key in timeSeriesData) {
+      let timeSeriesObject = timeSeriesData[key];
+      //this object has the properties wanted - '4. close' and so on
+        timeSeriesDataOpen.push(parseFloat(timeSeriesObject['4. close']));
+    }
+    latest = timeSeriesDataOpen[0];
+    callback(latest);
+  });
+}
+
 /* Example of call to wrapper
 currentClosing("FB", (data)=>{
   console.log(data);
