@@ -59,10 +59,10 @@ function movingAverage(symbol,days,callback){
     }
     let sum = 0;
     for (i=0;i<days;i++) {
-    sum+= timeSeriesDataOpen[i];
-  }
-  var average = sum/days;
-  callback(average);
+      sum+= timeSeriesDataOpen[i];
+    }
+    var average = sum/days;
+    callback(average);
   });
 }
 module.exports = {

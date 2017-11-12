@@ -80,8 +80,8 @@ bot.dialog('/', [
         if(averagelong>averageshort){
           builder.Prompts.text(session, "Go!");
         }
+        else builder.Prompts.text(session, "No!");
       })
       })
     }
-
 ]);
