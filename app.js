@@ -75,10 +75,10 @@ bot.dialog('/', [
         //(1-session.userData.support)*averagelong=>(wrapper.movingAverage(session.userData.symbol,1,(RealTimePrice)=>{})))
         if(averagelong>averageshort) {
           builder.Prompts.text(session, "Buy!");
-        wrapper.movingAverage(session.userData.symbol, 1, (data)=>
-        {
+         /*wrapper.currentClosing(session.userData.symbol, (data)=>
             port1.buy(session.userData.symbol, data, session.userData.numshares);
-         });
+         );*/
+          port1.buy(session.userData.symbol, 178.46, session.userData.numshares)
           builder.Prompts.text(session, "Buy!2");
           builder.Prompts.text(session, port1.log_portfolio(session.userData.symbol));
           builder.Prompts.text(session, "Buy!3");
