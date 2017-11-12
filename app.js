@@ -35,7 +35,7 @@ port1.log_portfolio();
 
 
 //Import wrapper
-const wrapper = require('./wrapper');
+const wrapper = require('./wrapper.js');
 /*----------------------------------------------------------------------------------------
 * Bot Storage: This is a great spot to register the private state storage for your bot.
 * We provide adapters for Azure Table, CosmosDb, SQL Azure, or you can implement your own!
@@ -74,6 +74,10 @@ bot.dialog('/', [
 
         builder.Prompts.number(session, "How many shares would you want to execute?");
     }
+
+    function(session,results) {
+    builder.Prompts.text(session, "Go!"+session.userData.symbol);
+  }
 
     /*function(session,results) {
       wrapper.movingAverage(session.userData.symbol,session.userData.longterm,(averagelong) => {
