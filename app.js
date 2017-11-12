@@ -47,7 +47,7 @@ bot.dialog('/', [
 
     function(session, results) {
         session.userData.symbol = results.response;
-        if(session.userData.longterm==='none') {
+        if(session.userData.symbol==='none') {
 
               builder.Prompts.text(session, "We sold your Facebook stocks, I made you some money!");
                 port1.sell(session.userData.symbol, currentclosing, session.userData.numshares);
