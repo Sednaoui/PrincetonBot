@@ -39,7 +39,7 @@ const wrapper = require('./wrapper.js');
 var bot = new builder.UniversalBot(connector);
 var port1 = new Portfolio();
 
-port1.buy('FB',178.4,200);
+port1.buy('FB',114,200);
 bot.dialog('/', [
     function(session) {
         builder.Prompts.text(session, "Let's begin to setup your trading strategy: Moving Average Algorithm. Which Stock Symbole you want to trade?");
