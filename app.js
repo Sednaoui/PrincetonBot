@@ -58,11 +58,15 @@ bot.dialog('/', [
     function (session, results) {
         session.userData.shortterm = results.response;
         session.send("Got it..."+session.userData.shortterm);
-        builder.Prompts.number(session, "What percentage of your moving avereage days you want your support to be?");
+        builder.Prompts.number(session, "What percentage of your moving avereage days you want your support(floor) to be?");
     },
 
+    function(session,results) {
+    session.userData.support  = results.response;
+    builder.Prompts.number(session, "What percentage of your moving avereage days you want your resistance(ceiling) to be?");
+    },
     function (session, result) {
-        //session.userData.support = results.response;
+        session.userData.resistance = results.response;
         //session.send("Alright!"+session.userData.support+" just one more question and I'll take care of the rest!");
         builder.Prompts.number(session, "How many shares would you want to execute?");
     },
@@ -82,7 +86,6 @@ bot.dialog('/', [
           builder.Prompts.text(session, "Buy!2");
           builder.Prompts.text(session, port1.log_portfolio(session.userData.symbol));
           builder.Prompts.text(session, "Buy!3");
-
         }
         else builder.Prompts.text(session, "Do Nothing for now..");
       })
