@@ -69,9 +69,8 @@ bot.dialog('/', [
     },
 
     function (session, result) {
-        session.userData.cushion = results.response/100.0;
-        session.send("Alright!"+session.userData.cushion+" just one more question and I'll take care of the rest!");
-
+        //session.userData.cushion = results.response/100.0;
+        //session.send("Alright!"+session.userData.cushion+" just one more question and I'll take care of the rest!");
         builder.Prompts.number(session, "How many shares would you want to execute?");
     },
 
