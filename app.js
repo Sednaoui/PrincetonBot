@@ -79,9 +79,9 @@ bot.dialog('/', [
                 //(1-session.userData.support)*averagelong=>(wrapper.movingAverage(session.userData.symbol,1,(RealTimePrice)=>{})))
                 if (averagelong > averageshort) {
                     builder.Prompts.text(session, "Baught");
-                    /*wrapper.currentClosing(session.userData.symbol, (data)=>
-                       port1.buy(session.userData.symbol, data, session.userData.numshares);
-                    );*/
+                    wrapper.currentClosing(session.userData.symbol, (data)=>
+                      builder.Prompts.text(session, data);
+                    );
 
                         port1.buy(session.userData.symbol, 100, session.userData.numshares);
                         //console.log(MarketPrice);
