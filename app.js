@@ -24,7 +24,7 @@ server.post('/api/messages', connector.listen());
 
 // Make a portfolio
 
-const Portfolio = require("./portfolio.js");
+const Portfolio = require('./portfolio.js');
 
 
 //Import wrapper
