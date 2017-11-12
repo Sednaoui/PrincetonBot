@@ -63,13 +63,13 @@ bot.dialog('/', [
     },
 
     function (session, results) {
-        session.userData.shortterm = results.response.entity;
+        session.userData.shortterm = results.response;
         session.send("Got it..."+session.userData.shortterm);
         builder.Prompts.number(session, "What percentage of your moving avereage days you want your support to be?");
     },
 
     function (session, result) {
-        session.userData.cushion = results.response.entity/100.0;
+        session.userData.cushion = results.response/100.0;
         session.send("Alright!"+session.userData.cushion+" just one more question and I'll take care of the rest!");
 
         builder.Prompts.number(session, "How many shares would you want to execute?");
