@@ -47,24 +47,24 @@ bot.dialog('/', [
 
     function(session, results) {
         session.userData.symbol = results.response;
+        if(session.userData.longterm==='none') {
+
+              builder.Prompts.text(session, "We sold your Facebook stocks, I made you some money!");
+                port1.sell(session.userData.symbol, currentclosing, session.userData.numshares);
+                builder.Prompts.text(session, port1.log_portfolio(session.userData.symbol));
+
+        }
+        else {
         session.send("I will monitor your short term and long term moving average days.");
         builder.Prompts.number(session, "What's your longterm moving average days?");
+      }
     },
 
     function(session, results) {
         session.userData.longterm = results.response;
-
-        if(session.userData.longterm==='none') {
-          {
-              builder.Prompts.text(session, "We sold your Facebook stocks, I made you some money!");
-                port1.sell(session.userData.symbol, currentclosing, session.userData.numshares);
-                builder.Prompts.text(session, port1.log_portfolio(session.userData.symbol));
-          }
-        }
-        else {
         session.send("Got it..." + session.userData.longterm);
         builder.Prompts.number(session, "What's your short term moving average days?");
-      }
+
     },
 
     function(session, results) {
