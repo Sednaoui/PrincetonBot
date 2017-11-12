@@ -83,6 +83,7 @@ bot.dialog('/', [
                        port1.buy(session.userData.symbol, data, session.userData.numshares);
                     );*/
                     wrapper.latest(session.userData.symbol, (MarketPrice) => {
+                        console.log(MarketPrice);
                         port1.buy(session.userData.symbol, MarketPrice, session.userData.numshares)
                     });
                     builder.Prompts.text(session, "Buy!2");
