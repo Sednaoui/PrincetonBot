@@ -65,7 +65,21 @@ function movingAverage(symbol,days,callback){
     callback(average);
   });
 }
+
+function currentClosing(symbol,callback){
+  api = new AlphavantageAPI();
+  api.getprice(symbol, (data)=> {
+    let timeSeriesData = data['Time Series (Daily)'];
+    let lastRefreshed = data['Meta Data']["3. Last Refreshed"];
+
+    let res = timeSeriesData[lastRefreshed]["4. close"];
+
+    callback(res);
+  });
+}
+
 module.exports = {
   AlphavantageAPI,
-  movingAverage
+  movingAverage,
+  currentClosing
 };
