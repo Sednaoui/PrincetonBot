@@ -50,8 +50,8 @@ bot.dialog('/', [
     function (session, results) {
         session.send("I will monitor your short term and long term moving average days.");
         builder.Prompts.number(session, "What's your long term moving average days?");
-        session.userData.longterm = results.response.entity;
-        builder.Prompts.text(session,"Your number is ${userData.longterm}");
+        //session.userData.longterm = results.response.entity;
+        //builder.Prompts.text(session,"Your number is ${userData.longterm}");
     },
 
     function (session, results) {
