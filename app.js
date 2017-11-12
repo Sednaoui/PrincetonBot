@@ -55,11 +55,10 @@ bot.dialog('/', [
     },
 
     function (session, results) {
-        session.userData.longterm = results.response.entity;
-        //session.send("Got it... ");
-        builder.Prompts.number(session, "What's your long term moving average days?");
-    },
-
+           session.userData.longterm = results.response.entity;
+           session.send("I will monitor your short term and long term moving average days.");
+           builder.Prompts.number(session, " What's your short term moving average days?");
+       },
     function (session, results) {
         session.userData.shortterm = results.response.entity;
         //session.send("Got it... ");
