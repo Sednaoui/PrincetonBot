@@ -87,8 +87,10 @@ bot.dialog('/', [
               does that work??
               */
               wrapper.currentClosing(session.userData.symbol, (currentclosing) => {
-                if ((averagelong > averageshort) && ((1-session.userData.support)*(session.userData.averagelong)) >= currentclosing) {
-                    builder.Prompts.text(session, "Hey, we bought the stocks!");
+                if ((averagelong > averageshort)) 
+              //  ((1-session.userData.support)*(session.userData.averagelong)) >= currentclosing
+              {
+                        builder.Prompts.text(session, "Hey, we bought the stocks!");
                         port1.buy(session.userData.symbol, currentclosing, session.userData.numshares);
                         //console.log(MarketPrice);
                         builder.Prompts.text(session, port1.log_portfolio(session.userData.symbol));
