@@ -85,11 +85,9 @@ bot.dialog('/', [
                         port1.buy(session.userData.symbol, data, session.userData.numshares);
                         //console.log(MarketPrice);
                         port1.buy(session.userData.symbol, data, session.userData.numshares);
-                        setTimeout(() => {
-                            builder.Prompts.text(session, "Buy!2");
-                            builder.Prompts.text(session, port1.log_portfolio(session.userData.symbol));
-                            builder.Prompts.text(session, "Buy!3");
-                        }, 1500)
+                        builder.Prompts.text(session, "Buy!2");
+                        builder.Prompts.text(session, port1.log_portfolio(session.userData.symbol));
+                        builder.Prompts.text(session, "Buy!3");
                     });
 
 
