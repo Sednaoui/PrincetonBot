@@ -74,7 +74,8 @@ bot.dialog('/', [
 
         builder.Prompts.number(session, "How many shares would you want to execute?");
     }
-    function(session,results) {
+
+    /*function(session,results) {
       wrapper.movingAverage(session.userData.symbol,session.userData.longterm,(averagelong) => {
       wrapper.movingAverage(session.userData.symbol,session.userData.shortterm, (averageshort) => {
         if(averagelong>averageshort){
@@ -83,5 +84,5 @@ bot.dialog('/', [
         else builder.Prompts.text(session, "No!");
       })
       })
-    }
+    }*/
 ]);
