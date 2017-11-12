@@ -78,22 +78,23 @@ bot.dialog('/', [
                 //do while later
                 //(1-session.userData.support)*averagelong=>(wrapper.movingAverage(session.userData.symbol,1,(RealTimePrice)=>{})))
                 if (averagelong > averageshort) {
-                    builder.Prompts.text(session, "Baught");
+                    builder.Prompts.text(session, "Hey, we bought them are you happy now? we're gonna make your rich - wait for it! ");
                     wrapper.currentClosing(session.userData.symbol, (data) => {
                         port1.buy(session.userData.symbol, data, session.userData.numshares);
                         //console.log(MarketPrice);
-                        port1.buy(session.userData.symbol, data, session.userData.numshares);
-                        builder.Prompts.text(session, "Buy!2");
                         builder.Prompts.text(session, port1.log_portfolio(session.userData.symbol));
-                        builder.Prompts.text(session, "Buy!3");
                     });
 
 
-
+                      //sell
                 } else if (averageshort > averagelong) {
-                    builder.Prompts.text(session, "Sold");
-                    port1.sell(session.userData.symbol, 180, session.userData.numshares);
-                    builder.Prompts.text(session, port1.log_portfolio(session.userData.symbol));
+                    builder.Prompts.text(session, "We sold them and believe me, we made u money!");
+                    wrapper.currentClosing(session.userData.symbol, (data) => {
+                      //also quick question, why do you call buy twice in the function above?
+                      port1.sell(session.userData.symbol, data, session.userData.numshares);
+                      builder.Prompts.text(session, port1.log_portfolio(session.userData.symbol));
+                    });
+
                 }
             })
         })
