@@ -44,18 +44,19 @@ var bot = new builder.UniversalBot(connector);
 
 bot.dialog('/', [
     function (session) {
-        builder.Prompts.text(session, "Hello... What's your name?");
+        builder.Prompts.text(session, "Let's begin to setup your trading strategy: Moving Average Algorithm");
     },
-    
+
     function (session, results) {
-<<<<<<< HEAD
-        session.userData.name = results.response;
-        builder.Prompts.number(session, "Hi " + results.response + ", How many years have you been coding?");
-=======
+        session.userData.longterm = results.response.entity;
+        session.send("I will monitor your short term and long term moving average days.");
+        builder.Prompts.number(session, " What's your short term moving average days?");
+    },
+
+    function (session, results) {
         session.userData.longterm = results.response.entity;
         session.send("Got it... ");
         builder.Prompts.number(session, "How many days do you consider to be short-term?");
->>>>>>> a775dbf31baf8d29ea645e5b55ed3ea7a7bf39fc
     },
 
     function (session, results) {
