@@ -50,8 +50,8 @@ bot.dialog('/', [
         if(session.userData.symbol==='none') {
 
               builder.Prompts.text(session, "We sold your Facebook stocks, I made you some money!");
-                port1.sell(session.userData.symbol, currentclosing, session.userData.numshares);
-                builder.Prompts.text(session, port1.log_portfolio(session.userData.symbol));
+                port1.sell('FB', 178.46, 200); //hardcoded sorry
+                builder.Prompts.text(session, port1.log_portfolio('FB'));
 
         }
         else {
