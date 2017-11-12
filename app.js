@@ -69,15 +69,16 @@ bot.dialog('/', [
     },
 
     function (session, result) {
-        //session.userData.cushion = results.response/100.0;
-        //session.send("Alright!"+session.userData.cushion+" just one more question and I'll take care of the rest!");
+        session.userData.support = results.response;
+        session.send("Alright!"+session.userData.support+" just one more question and I'll take care of the rest!");
         builder.Prompts.number(session, "How many shares would you want to execute?");
     },
 
     function(session,results) {
       wrapper.movingAverage(session.userData.symbol,session.userData.longterm,(averagelong) => {
       wrapper.movingAverage(session.userData.symbol,session.userData.shortterm, (averageshort) => {
-        if(averagelong>averageshort){
+        if(averagelong>averageshort &&
+          session.userData.support*averagelong*0.01===(wrapper.movingAverage(session.userData.symbol,1,(RealTimePrice)=>{}))){
           builder.Prompts.text(session, "Go!");
         }
         else builder.Prompts.text(session, "No!");
