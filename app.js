@@ -75,7 +75,7 @@ bot.dialog('/', [
         if(averagelong>averageshort) {
           builder.Prompts.text(session, "Buy!");
           port1.buy(session.userData.symbol, 10, 1);
-          builder.Prompts.text(session,port1.log_portfolio());
+          builder.Prompts.text(session,port1.log_portfolio.bind(port1));
         }
         else builder.Prompts.text(session, "Do Nothing for now..");
       })
