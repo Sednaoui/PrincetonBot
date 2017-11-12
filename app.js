@@ -50,24 +50,24 @@ bot.dialog('/', [
     function (session, results) {
         session.userData.longterm = results.response.entity;
         session.send("I will monitor your short term and long term moving average days.");
-        builder.Prompts.number(session, " What's your short term moving average days?");
+        builder.Prompts.number(session, "What's your longterm moving average days?");
     },
 
     function (session, results) {
         session.userData.longterm = results.response.entity;
         session.send("Got it... ");
-        builder.Prompts.number(session, "How many days do you consider to be short-term?");
+        builder.Prompts.number(session, "What's your short term moving average days?");
     },
 
     function (session, results) {
         session.userData.shortterm = results.response.entity;
         session.send("Got it... ");
-        builder.Prompts.number(session, "How much % of a cushion do you want before we make a purchase?");
+        builder.Prompts.number(session, "What percentage of your moving avereage days you want your support to be?");
     },
 
     function (session, result) {
         session.userData.cushion = results.response.entity/100.0;
         session.send("Alright! just one more question and I'll take care of the rest!");
-        builder.Prompts.number(session, "How many shares would you like?");
+        builder.Prompts.number(session, "How many shares would you want to execute?");
     }
 ]);
