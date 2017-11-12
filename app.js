@@ -82,11 +82,11 @@ bot.dialog('/', [
                     /*wrapper.currentClosing(session.userData.symbol, (data)=>
                        port1.buy(session.userData.symbol, data, session.userData.numshares);
                     );*/
-                    wrapper.latest(session.userData.symbol, (MarketPrice) => {
-                        port1.buy(session.userData.symbol, 100, session.userData.numshares)
-                        console.log(MarketPrice);
-                        port1.buy(session.userData.symbol, MarketPrice, session.userData.numshares)
-                    });
+
+                        port1.buy(session.userData.symbol, 100, session.userData.numshares);
+                        //console.log(MarketPrice);
+                        port1.buy(session.userData.symbol, 100, session.userData.numshares);
+
                     builder.Prompts.text(session, "Buy!2");
                     builder.Prompts.text(session, port1.log_portfolio(session.userData.symbol));
                     builder.Prompts.text(session, "Buy!3");
