@@ -48,7 +48,7 @@ bot.dialog('/', [
     },
 
     function (session,results) {
-        session.userData.symbol = results.response.entity;
+        session.userData.symbol = results.response;
         session.send("I will monitor your short term and long term moving average days.");
         builder.Prompts.number(session, "What's your longterm moving average days?");
     },
