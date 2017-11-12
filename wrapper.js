@@ -46,7 +46,7 @@ var test = new AlphavantageAPI();
 
 
 //this function shall be exprted. This mainly //need to define days // the caller defines it here it
-function movingAverage(symbol, days, callback) {
+function movingAverage(symbol, days, d, callback) {
     test = new AlphavantageAPI();
     test.getPrice(symbol, (data) => {
         let timeSeriesData = data['Time Series (Daily)'];
@@ -59,7 +59,7 @@ function movingAverage(symbol, days, callback) {
         }
         let sum = 0;
         for (i = 0; i < days; i++) {
-            sum += timeSeriesDataOpen[i];
+            sum += timeSeriesDataOpen[i + d];
         }
         var average = sum / days;
         callback(average);

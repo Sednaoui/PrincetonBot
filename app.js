@@ -72,36 +72,40 @@ bot.dialog('/', [
     },
 
     function(session, results) {
+        var days_d = 10;
+
+        for (i = 0; i < days_d; i++) {
+            session.userData.numshares = results.response
+            wrapper.movingAverage(session.userData.symbol, session.userData.longterm, i, (averagelong) => {
+                wrapper.movingAverage(session.userData.symbol, session.userData.shortterm, i, (averageshort) => {
+
+                  wrapper.currentClosing(session.userData.symbol, (currentclosing) => {
+                    if ((averagelong > averageshort) && ((1-session.userData.support)*(session.userData.averagelong)) >= currentclosing) {
+                        builder.Prompts.text(session, "Hey, we bought them are you happy now? we're gonna make your rich - wait for it! ");
+                            port1.buy(session.userData.symbol, currentclosing, session.userData.numshares);
+                            //console.log(MarketPrice);
+                            builder.Prompts.text(session, port1.log_portfolio(session.userData.symbol));
+
+                          //sell
+                    }
+                  });
+                })
+            })
+        }
+    },
+
+    function(session, results) {
         session.userData.numshares = results.response
+        
         wrapper.movingAverage(session.userData.symbol, session.userData.longterm, (averagelong) => {
             wrapper.movingAverage(session.userData.symbol, session.userData.shortterm, (averageshort) => {
-                //do while later
-                //(1-session.userData.support)*averagelong=>(wrapper.movingAverage(session.userData.symbol,1,(RealTimePrice)=>{})))
 
-
-
-                /*do {
-                  look up current stock price
-              }
-              //while (keep getting current stock price while we condition X )
-
-              does that work??
-              */
               wrapper.currentClosing(session.userData.symbol, (currentclosing) => {
-                if ((averagelong > averageshort) && ((1-session.userData.support)*(session.userData.averagelong)) >= currentclosing) {
-                    builder.Prompts.text(session, "Hey, we bought them are you happy now? we're gonna make your rich - wait for it! ");
-                        port1.buy(session.userData.symbol, currentclosing, session.userData.numshares);
-                        //console.log(MarketPrice);
-                        builder.Prompts.text(session, port1.log_portfolio(session.userData.symbol));
-
-                      //sell
-                } else if ((averageshort > averagelong) && ((1-session.userData.resistance)*(session.userData.averageshort)) <= currentclosing) {
+                if ((averageshort > averagelong) && ((1-session.userData.resistance)*(session.userData.averageshort)) <= currentclosing) {
                     builder.Prompts.text(session, "We sold them and believe me, we made you some money!");
                       //also quick question, why do you call buy twice in the function above?
                       port1.sell(session.userData.symbol, currentclosing, session.userData.numshares);
                       builder.Prompts.text(session, port1.log_portfolio(session.userData.symbol));
-
-
                 }
               });
             })
