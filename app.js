@@ -68,15 +68,16 @@ bot.dialog('/', [
     },
 
     function(session,results) {
+      session.userData.numshares = results.response
       wrapper.movingAverage(session.userData.symbol,session.userData.longterm,(averagelong) => {
       wrapper.movingAverage(session.userData.symbol,session.userData.shortterm, (averageshort) => {
         //do while later
         //(1-session.userData.support)*averagelong=>(wrapper.movingAverage(session.userData.symbol,1,(RealTimePrice)=>{})))
         if(averagelong>averageshort) {
           builder.Prompts.text(session, "Buy!");
-          port1.buy(session.userData.symbol, 10, 1);
+          port1.buy(session.userData.symbol, 10, session.userData.numshares);
           builder.Prompts.text(session, "Buy!2");
-          builder.Prompts.text(session,port1.log_portfolio.bind(port1));
+          builder.Prompts.text(session, port1.log_portfolio(session.userData.symbol));
           builder.Prompts.text(session, "Buy!3");
 
         }
