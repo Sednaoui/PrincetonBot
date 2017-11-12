@@ -27,13 +27,6 @@ server.post('/api/messages', connector.listen());
 var Portfolio = require("./portfolio");
 var port1 = new Portfolio();
 
-port1.log_portfolio();
-port1.buy('FB', 10.5, 1);
-port1.log_portfolio();
-port1.sell('FB', 12, 1);
-port1.log_portfolio();
-
-
 //Import wrapper
 const wrapper = require('./wrapper.js');
 /*----------------------------------------------------------------------------------------
@@ -77,11 +70,14 @@ bot.dialog('/', [
     function(session,results) {
       wrapper.movingAverage(session.userData.symbol,session.userData.longterm,(averagelong) => {
       wrapper.movingAverage(session.userData.symbol,session.userData.shortterm, (averageshort) => {
-        if(averagelong>averageshort &&
-          session.userData.support*averagelong*0.01===(wrapper.movingAverage(session.userData.symbol,1,(RealTimePrice)=>{}))){
-          builder.Prompts.text(session, "Go!");
+        //do while later
+        //(1-session.userData.support)*averagelong=>(wrapper.movingAverage(session.userData.symbol,1,(RealTimePrice)=>{})))
+        if(averagelong>averageshort) {
+          builder.Prompts.text(session, "Buy!");
+          port1.buy(symbol, 10, 1);
+          port1.log_portfolio();
         }
-        else builder.Prompts.text(session, "No!");
+        else builder.Prompts.text(session, "Do Nothing for now..");
       })
       })
     }
