@@ -73,7 +73,7 @@ bot.dialog('/', [
         session.send("Alright!"+session.userData.cushion+" just one more question and I'll take care of the rest!");
 
         builder.Prompts.number(session, "How many shares would you want to execute?");
-    }
+    },
 
     function(session,results) {
     builder.Prompts.text(session, "Go!"+session.userData.symbol);
