@@ -97,11 +97,10 @@ bot.dialog('/', [
                       //sell
                 } else if ((averageshort > averagelong) && ((1-session.userData.resistance)*(session.userData.averageshort)) <= currentclosing) {
                     builder.Prompts.text(session, "We sold them and believe me, we made you some money!");
-                    wrapper.currentClosing(session.userData.symbol, (data) => {
                       //also quick question, why do you call buy twice in the function above?
-                      port1.sell(session.userData.symbol, data, session.userData.numshares);
+                      port1.sell(session.userData.symbol, currentclosing, session.userData.numshares);
                       builder.Prompts.text(session, port1.log_portfolio(session.userData.symbol));
-                    });
+
 
                 }
               });
