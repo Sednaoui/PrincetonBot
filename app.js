@@ -47,15 +47,15 @@ bot.dialog('/', [
         builder.Prompts.text(session, "Let's begin to setup your trading strategy: Moving Average Algorithm");
     },
 
-    function (session, results) {
-        session.userData.longterm = results.response.entity;
+    function (session) {
+        //session.userData.longterm = results.response.entity;
         session.send("I will monitor your short term and long term moving average days.");
         builder.Prompts.number(session, "What's your longterm moving average days?");
     },
 
     function (session, results) {
         session.userData.longterm = results.response.entity;
-        session.send("Got it... ");
+        session.send("Got it..."+userData.longterm);
         builder.Prompts.number(session, "What's your short term moving average days?");
     },
 
