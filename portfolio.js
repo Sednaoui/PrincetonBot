@@ -24,12 +24,12 @@ Portfolio.prototype.sell = function(name, price_sold, n_sold) {
     }
 };
 
-Portfolio.prototype.log_portfolio = function() {
-    console.log('logging')
+Portfolio.prototype.log_portfolio = function(callback) {
+    var output = 0;
     for (var key in this.keys){
-        console.log(key, this.keys[key]);
+        output = this.keys[key] + key[0].toString() + key[1].toString();
     }
-    console.log(this.balance);
+     callback(output);
 };
 
 exports.Portfolio = Portfolio;

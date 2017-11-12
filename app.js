@@ -72,8 +72,6 @@ bot.dialog('/', [
       wrapper.movingAverage(session.userData.symbol,session.userData.shortterm, (averageshort) => {
         //do while later
         //(1-session.userData.support)*averagelong=>(wrapper.movingAverage(session.userData.symbol,1,(RealTimePrice)=>{})))
-        builder.Prompts.text(session,averagelong);
-        builder.Prompts.text(session,averageshort);
         if(averagelong>averageshort) {
           builder.Prompts.text(session, "Buy!");
           port1.buy(symbol, 10, 1);
