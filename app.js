@@ -44,11 +44,11 @@ var bot = new builder.UniversalBot(connector);
 
 bot.dialog('/', [
     function (session) {
-        builder.Prompts.text(session, "Let's begin to setup your trading strategy: Moving Average Algorithm");
+        builder.Prompts.text(session, "Let's begin to setup your trading strategy: Moving Average Algorithm. Which Stock Symbole you want to trade?");
     },
 
-    function (session) {
-        //session.userData.longterm = results.response.entity;
+    function (session,results) {
+        session.userData.symbol = results.response.entity;
         session.send("I will monitor your short term and long term moving average days.");
         builder.Prompts.number(session, "What's your longterm moving average days?");
     },
@@ -61,13 +61,23 @@ bot.dialog('/', [
 
     function (session, results) {
         session.userData.shortterm = results.response.entity;
-        session.send("Got it... ");
+        session.send("Got it..."+session.userData.shortterm);
         builder.Prompts.number(session, "What percentage of your moving avereage days you want your support to be?");
     },
 
     function (session, result) {
         session.userData.cushion = results.response.entity/100.0;
-        session.send("Alright! just one more question and I'll take care of the rest!");
+        session.send("Alright!"+session.userData.cushion+" just one more question and I'll take care of the rest!");
         builder.Prompts.number(session, "How many shares would you want to execute?");
     }
+
+    const wrapper = require('./wrapper');
+    wrapper.movingAverage("FB",300,(average1) => {
+      wrapper.movingAverage("FB",600, (average2) => {
+        if(average1>average2){
+        //do something
+        }
+      })
+    })
+
 ]);
