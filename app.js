@@ -1,3 +1,5 @@
+import { setTimeout } from 'timers';
+
 /*-----------------------------------------------------------------------------
 A simple echo bot for the Microsoft Bot Framework.
 -----------------------------------------------------------------------------*/
@@ -80,16 +82,17 @@ bot.dialog('/', [
                 if (averagelong > averageshort) {
                     builder.Prompts.text(session, "Baught");
                     wrapper.currentClosing(session.userData.symbol, (data) => {
-                        builder.Prompts.text(session, data)
+                        port1.buy(session.userData.symbol, data, session.userData.numshares);
+                        //console.log(MarketPrice);
+                        port1.buy(session.userData.symbol, data, session.userData.numshares);
+                        setTimeout(() => {
+                            builder.Prompts.text(session, "Buy!2");
+                            builder.Prompts.text(session, port1.log_portfolio(session.userData.symbol));
+                            builder.Prompts.text(session, "Buy!3");
+                        }, 1500)
                     });
 
-                    port1.buy(session.userData.symbol, 100, session.userData.numshares);
-                    //console.log(MarketPrice);
-                    port1.buy(session.userData.symbol, 100, session.userData.numshares);
 
-                    builder.Prompts.text(session, "Buy!2");
-                    builder.Prompts.text(session, port1.log_portfolio(session.userData.symbol));
-                    builder.Prompts.text(session, "Buy!3");
 
                 } else if (averageshort > averagelong) {
                     builder.Prompts.text(session, "Sold");
