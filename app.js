@@ -88,15 +88,15 @@ bot.dialog('/', [
               does that work??
               */
               wrapper.currentClosing(session.userData.symbol, (currentclosing) => {
-                if (averagelong > averageshort && ((1-session.userData.support)*(session.userData.averagelong)) >= currentclosing) {
+                if ((averagelong > averageshort) && ((1-session.userData.support)*(session.userData.averagelong)) >= currentclosing) {
                     builder.Prompts.text(session, "Hey, we bought them are you happy now? we're gonna make your rich - wait for it! ");
                         port1.buy(session.userData.symbol, currentclosing, session.userData.numshares);
                         //console.log(MarketPrice);
                         builder.Prompts.text(session, port1.log_portfolio(session.userData.symbol));
 
                       //sell
-                } else if (averageshort > averagelong) {
-                    builder.Prompts.text(session, "We sold them and believe me, we made u money!");
+                } else if ((averageshort > averagelong) && ((1-session.userData.resistance)*(session.userData.averageshort)) <= currentclosing) {
+                    builder.Prompts.text(session, "We sold them and believe me, we made you some money!");
                     wrapper.currentClosing(session.userData.symbol, (data) => {
                       //also quick question, why do you call buy twice in the function above?
                       port1.sell(session.userData.symbol, data, session.userData.numshares);
