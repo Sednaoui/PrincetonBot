@@ -55,7 +55,7 @@ bot.dialog('/', [
 
     function (session, results) {
         session.userData.longterm = results.response;
-        session.send("Got it..."+userData.longterm);
+        session.send("Got it..."+results.response);
         builder.Prompts.number(session, "What's your short term moving average days?");
     },
 
